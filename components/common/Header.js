@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+
 import { Button, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 
 const Header = () => {
@@ -41,33 +43,13 @@ const Header = () => {
           </Nav>
           <div className="sign-up">
             <strong className="">Sign In</strong>
-            <button className="custom-btn mx-3">Sign Up</button>
+            <Link href="/signup">
+              <button className="custom-btn mx-3">Sign Up</button>
+            </Link>
           </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    // <Navbar
-    //   expand="lg"
-    //   fixed="top"
-    //   className={
-    //     navShadow
-    //       ? "nav-container shadow-transition bg-light"
-    //       : "nav-container bg-light"
-    //   }
-    // >
-    //   <Container>
-    //     <strong>Fiber</strong>
-    //     <div className="nav-items">
-    //       <span className="mx-2">Community</span>
-    //       <span className="mx-2">Pricing</span>
-    //       <span className="mx-2">Features</span>
-    //     </div>
-    //     <div className="sign-up">
-    //       <strong className="">Sign In</strong>
-    //       <button className="custom-btn mx-3">Sign Up</button>
-    //     </div>
-    //   </Container>
-    // </Navbar>
   );
 };
 
