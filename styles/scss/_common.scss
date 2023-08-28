@@ -75,3 +75,16 @@ $primary-active: darken($primary, 15%);
   border: none !important;
   padding: 0 !important;
 }
+
+.dot,
+.active-dot {
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+.active-dot {
+  background-color: #fafafa;
+
+}
