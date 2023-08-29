@@ -5,7 +5,7 @@ import { Image } from "react-bootstrap";
 const signup = () => {
   return (
     <div style={{ height: "100vh" }} className="d-flex flex-wrap">
-      <div className="col-12 col-lg-6 d-flex justify-content-center bg-light p-4 py-5 py-lg-0">
+      <div className="col-12 col-lg-6 d-flex justify-content-center bg-light p-4 ">
         <div className="col-10">
           <strong>Fiber</strong>
           <h2 className="fw-bold my-5">Create your Fiber account</h2>

@@ -1,78 +1,130 @@
 import { useState } from "react";
-import { FloatingLabel, FormControl } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
+import { FloatingLabel, Col, Form } from "react-bootstrap";
+import { useRouter } from "next/router";
 
 function CustomForm() {
-  const [email, setEmail] = useState("John@example.com");
-  const [name, setName] = useState("Jhon Doe");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailPlaceholder, setEmailPlaceholder] = useState("John@example.com");
+  const [namePlaceholder, setNamePlaceholder] = useState("Jhon Doe");
   const [passwordPlaceholder, setPasswordPlaceholder] = useState(
     "At least 8 characters"
   );
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const [validated, setValidated] = useState(false);
 
-  const handleEmailFocus = () => {
-    setEmail("Your Email:");
+  const router = useRouter();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const form = e.currentTarget;
+
+    if (form.checkValidity()) {
+      const user = { email, name };
+      console.log(user, "user");
+      localStorage.setItem("user", JSON.stringify(user));
+      router.push("/");
+    }
+
+    setValidated(true);
   };
 
-  const handleEmailBlur = () => {
-    setEmail("John@example.com");
+  const handleInputChange = (e, setter) => {
+    setter(e.target.value);
   };
-  const handleNameFocus = () => {
-    setName("Your Name:");
+
+  const handleFocus = (setter, placeholder) => {
+    setter(placeholder);
   };
-  const handleNameBlur = () => {
-    setName("John Doe");
-  };
-  const handlePasswordFocus = () => {
-    setPasswordPlaceholder("Your Password:");
-  };
-  const handlePasswordBlur = () => {
-    setPasswordPlaceholder("At least 8 characters");
+
+  const handleBlur = (setter, value, placeholder, initialPlaceholder) => {
+    if (value && value.length > 0) {
+      setter(placeholder);
+    } else {
+      setter(initialPlaceholder);
+    }
   };
 
   return (
-    <Form>
-      <Form.Group as={Col}>
+    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form.Group as={Col} controlId="validationName">
         <Form.Label className="fw-bold">Name</Form.Label>
         <FloatingLabel
+          name="name"
           controlId="floatingInput"
-          label={name}
+          label={namePlaceholder}
           className="mb-3"
-          onFocus={handleNameFocus}
-          onBlur={handleNameBlur}
+          onFocus={() => handleFocus(setNamePlaceholder, "your name:")}
+          onBlur={() =>
+            handleBlur(setNamePlaceholder, name, namePlaceholder, "Jhon Doe")
+          }
+          onChange={(e) => handleInputChange(e, setName)}
+          value={name}
         >
-          <Form.Control type="email" placeholder="name@example.com" />
+          <Form.Control required type="text" placeholder="name@example.com" />
+          <Form.Control.Feedback className="form-error" type="invalid">
+            Need your name
+          </Form.Control.Feedback>
         </FloatingLabel>
       </Form.Group>
-      <Form.Group as={Col}>
+      <Form.Group as={Col} controlId="validationEmail">
         <Form.Label className="fw-bold">E-mail</Form.Label>
         <FloatingLabel
           controlId="floatingInput"
-          label={email}
+          label={emailPlaceholder}
           className="mb-3"
-          onFocus={handleEmailFocus}
-          onBlur={handleEmailBlur}
+          onFocus={() => handleFocus(setEmailPlaceholder, "your email:")}
+          onBlur={() =>
+            handleBlur(
+              setEmailPlaceholder,
+              email,
+              emailPlaceholder,
+              "John@example.com"
+            )
+          }
+          onChange={(e) => handleInputChange(e, setEmail)}
+          value={email}
         >
-          <Form.Control type="email" placeholder="name@example.com" />
+          <Form.Control required type="email" placeholder="name@example.com" />
+          <Form.Control.Feedback className="form-error" type="invalid">
+            Need a valid email address
+          </Form.Control.Feedback>
         </FloatingLabel>
       </Form.Group>
-      <Form.Group as={Col} className="mb-4">
+      <Form.Group as={Col} className="mb-4" controlId="validationPassword">
         <Form.Label className="fw-bold">Password</Form.Label>
         <FloatingLabel
-          onFocus={handlePasswordFocus}
-          onBlur={handlePasswordBlur}
           controlId="floatingPassword"
           label={passwordPlaceholder}
+          onFocus={() => handleFocus(setPasswordPlaceholder, "Your Password:")}
+          onBlur={() =>
+            handleBlur(
+              setPasswordPlaceholder,
+              password,
+              passwordPlaceholder,
+              "At least 8 characters"
+            )
+          }
+          onChange={(e) => handleInputChange(e, setPassword)}
+          value={password}
         >
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control
+            required
+            type="password"
+            placeholder="Password"
+            minLength={8}
+          />
+          <Form.Control.Feedback className="form-error-password" type="invalid">
+            Needs at least 8 characters for the password
+          </Form.Control.Feedback>
         </FloatingLabel>
       </Form.Group>
 
       <Form.Group className="mb-5" id="formGridCheckbox">
         <Form.Check
-          size="large"
           type="checkbox"
           label={
             <span>
@@ -86,16 +138,21 @@ function CustomForm() {
               .
             </span>
           }
+          required
+          checked={checkboxChecked}
+          onChange={(e) => handleInputChange(e, setCheckboxChecked)}
         />
       </Form.Group>
       <Form.Group
         as={Col}
         className="d-flex justify-content-center align-items-center row"
       >
-        <button className="custom-btn m-3 col-12">Create Fiber Account</button>
+        <button type="submit" className="custom-btn m-3 col-12">
+          Create Fiber Account
+        </button>
         <span className="fw-medium col-12 text-center">
-          Already have an account?{" "}
-          <span className="color-primary pointer">Sing in</span>
+          Already have an account?
+          <span className="color-primary pointer">Sign in</span>
         </span>
       </Form.Group>
     </Form>
