@@ -1,14 +1,134 @@
 .intro-section {
-    padding-top: 90px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  padding-top: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .intro-title {
-    font-size: 75px;
+  font-size: 75px;
 }
 
 .navbar-toggler {
-    border: none !important;
+  border: none !important;
+}
+.custom-shadow {
+    filter: drop-shadow(2px 2px 8px  #00000090);}
+
+.obj1 {
+  position: absolute;
+  left: -30px;
+  top: 120px;
+}
+.obj2 {
+  position: absolute;
+  left: 50px;
+  top: -20px;
+}
+.obj3 {
+  position: absolute;
+  left: 230px;
+  top: -70px;
+  scale: 0.8;
+}
+.obj4 {
+  position: absolute;
+  left: 320px;
+  top: -40px;
+  scale: 0.8;
+}
+.obj5 {
+  position: absolute;
+  left: 420px;
+  top: 85px;
+}
+.obj6 {
+  position: absolute;
+  left: 450px;
+  top: 220px;
+}
+.plus1 {
+  position: absolute;
+  left: 320px;
+  top: 210px;
+  scale: 0.8;
+}
+.plus2 {
+  position: absolute;
+  left: 220px;
+  top: 80px;
+  scale: 0.6;
+}
+.plus3 {
+  position: absolute;
+  left: 120px;
+  top: 140px;
+  scale: 1;
+}
+
+.image-container1 {
+  animation: imageAnimation1 4s infinite ease;
+}
+
+.image-container2 {
+  animation: imageAnimation2 4s infinite ease;
+}
+
+.image-container3 {
+  animation: imageAnimation1 4s infinite ease;
+}
+
+.image-container4 {
+  animation: imageAnimation2 4s infinite ease;
+}
+
+.image-container5 {
+  animation: imageAnimation1 4s infinite ease;
+}
+
+.image-container6 {
+  animation: imageAnimation2 4s infinite ease;
+}
+.image-container7 {
+  animation: imageAnimation3 4s infinite ease;
+}
+.image-container8 {
+  animation: imageAnimation1 4s infinite ease;
+}
+.image-container9 {
+  animation: imageAnimation2 4s infinite ease;
+}
+
+@keyframes imageAnimation1 {
+  0% {
+    transform: translate(-3px, -3px) scale(0.97);
+  }
+  50% {
+    transform: translate(3px, 3px) scale(1.02);
+  }
+  100% {
+    transform: translate(-3px, -3px) scale(0.97);
+  }
+}
+@keyframes imageAnimation2 {
+  0% {
+    transform: translate(4px, 4px) scale(0.98);
+  }
+  50% {
+    transform: translate(-4px, -4px) scale(1.01);
+  }
+  100% {
+    transform: translate(4px, 4px) scale(0.98);
+  }
+}
+@keyframes imageAnimation3 {
+  0% {
+    transform: translate(-3px, 3px) scale(0.97);
+  }
+  50% {
+    transform: translate(3px, -3px) scale(1.02);
+  }
+  100% {
+    transform: translate(-3px, 3px) scale(0.97);
+  }
 }

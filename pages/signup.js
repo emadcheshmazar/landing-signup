@@ -4,15 +4,6 @@ import RegesterImage from "../components/signup/RegesterImage";
 import Link from "next/link";
 
 const Signup = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("current-user"));
-    console.log(storedUser);
-    if (storedUser && storedUser.name && storedUser.email) {
-      setUser(storedUser);
-    }
-  }, []);
 
   return (
     <div style={{ height: "100vh" }} className="d-flex flex-wrap">

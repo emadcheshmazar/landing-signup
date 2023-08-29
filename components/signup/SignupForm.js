@@ -17,7 +17,6 @@ function SignupForm() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -35,7 +34,7 @@ function SignupForm() {
         return;
       }
 
-      const user = { email, name, password };
+      const user = { email, name, password, comments: [] };
       parsedUsers.push(user);
 
       localStorage.setItem("users", JSON.stringify(parsedUsers));

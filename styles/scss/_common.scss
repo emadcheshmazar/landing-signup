@@ -116,3 +116,33 @@ $primary-active: darken($primary, 15%);
 .active-dot {
   background-color: #fafafa;
 }
+
+.user-avatar {
+  height: 40px;
+  width: 40px;
+  background-color: $primary;
+  border-radius: 50%;
+  display: inline-block;
+  color: #fafafa;
+}
+
+.user-avatar2 {
+  height: 80px;
+  width: 80px;
+  background-color: $primary;
+  border-radius: 50%;
+  display: inline-block;
+  color: whitesmoke;
+}
+
+.user-dropdown {
+  #basic-nav-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .dropdown-menu {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

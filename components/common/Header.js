@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { Container, Image, Nav, NavDropdown, Navbar } from "react-bootstrap";
 
 const Header = () => {
   const [navShadow, setNavShadow] = useState(false);
@@ -30,7 +30,17 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("current-user");
     setUser(null);
+    window.location.reload();
   };
+
+  const userTitle = (
+    <div className="d-flex justify-content-center align-items-center">
+      <strong className="user-avatar mx-2 color-primary fs-4 d-flex justify-content-center align-items-center">
+        {user?.name[0].toUpperCase()}
+      </strong>
+      <span>{user?.name}</span>
+    </div>
+  );
 
   return (
     <Navbar
@@ -55,11 +65,26 @@ const Header = () => {
           </Nav>
           {user ? (
             <NavDropdown
-              className="my-1"
-              title={user.name}
+              className="my-1 user-dropdown"
+              title={userTitle}
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleLogout}>
+                <Image
+                  className="col-2 mx-2"
+                  src="/assets/logout.png"
+                  alt="hero-Illustration"
+                />
+                Logout
+              </NavDropdown.Item>
+              <NavDropdown.Item href={`/user/${user.name.replace(/ /g, "-")}`}>
+                <Image
+                  className="col-2 mx-2"
+                  src="/assets/avatar-ico.png"
+                  alt="hero-Illustration"
+                />
+                Profile
+              </NavDropdown.Item>
             </NavDropdown>
           ) : (
             <div>
