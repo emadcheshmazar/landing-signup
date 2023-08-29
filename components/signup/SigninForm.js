@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { FloatingLabel, Col, Form } from "react-bootstrap";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-function CustomForm() {
+function SigninForm() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +14,7 @@ function CustomForm() {
   );
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
 
@@ -23,10 +25,21 @@ function CustomForm() {
     const form = e.currentTarget;
 
     if (form.checkValidity()) {
-      const user = { email, name };
-      console.log(user, "user");
-      localStorage.setItem("user", JSON.stringify(user));
-      router.push("/");
+      const users = localStorage.getItem("users");
+      const parsedUsers = JSON.parse(users) || [];
+      const existingUser = parsedUsers.find(
+        (user) => user.email === email && user.password === password
+      );
+
+      if (existingUser) {
+        setErrorMessage("");
+        localStorage.setItem("current-user", JSON.stringify(existingUser));
+        router.push("/");
+      } else {
+        setErrorMessage("Invalid email or password");
+      }
+
+      setValidated(false);
     }
 
     setValidated(true);
@@ -50,26 +63,6 @@ function CustomForm() {
 
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Form.Group as={Col} controlId="validationName">
-        <Form.Label className="fw-bold">Name</Form.Label>
-        <FloatingLabel
-          name="name"
-          controlId="floatingInput"
-          label={namePlaceholder}
-          className="mb-3"
-          onFocus={() => handleFocus(setNamePlaceholder, "your name:")}
-          onBlur={() =>
-            handleBlur(setNamePlaceholder, name, namePlaceholder, "Jhon Doe")
-          }
-          onChange={(e) => handleInputChange(e, setName)}
-          value={name}
-        >
-          <Form.Control required type="text" placeholder="name@example.com" />
-          <Form.Control.Feedback className="form-error" type="invalid">
-            Need your name
-          </Form.Control.Feedback>
-        </FloatingLabel>
-      </Form.Group>
       <Form.Group as={Col} controlId="validationEmail">
         <Form.Label className="fw-bold">E-mail</Form.Label>
         <FloatingLabel
@@ -99,7 +92,7 @@ function CustomForm() {
         <FloatingLabel
           controlId="floatingPassword"
           label={passwordPlaceholder}
-          onFocus={() => handleFocus(setPasswordPlaceholder, "Your Password:")}
+          onFocus={() => handleFocus(setPasswordPlaceholder, "your password:")}
           onBlur={() =>
             handleBlur(
               setPasswordPlaceholder,
@@ -122,41 +115,23 @@ function CustomForm() {
           </Form.Control.Feedback>
         </FloatingLabel>
       </Form.Group>
-
-      <Form.Group className="mb-5" id="formGridCheckbox">
-        <Form.Check
-          type="checkbox"
-          label={
-            <span>
-              By creating an account on Fiber, you agree to the
-              <br />
-              <u>
-                <strong className="color-primary pointer">
-                  Terms & Conditions
-                </strong>
-              </u>
-              .
-            </span>
-          }
-          required
-          checked={checkboxChecked}
-          onChange={(e) => handleInputChange(e, setCheckboxChecked)}
-        />
-      </Form.Group>
+      {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
       <Form.Group
         as={Col}
         className="d-flex justify-content-center align-items-center row"
       >
         <button type="submit" className="custom-btn m-3 col-12">
-          Create Fiber Account
+          Login to Fiber Account
         </button>
         <span className="fw-medium col-12 text-center">
-          Already have an account?
-          <span className="color-primary pointer">Sign in</span>
+          Not registered?
+          <Link href="/signup">
+            <span className="color-primary pointer">Sign up</span>
+          </Link>
         </span>
       </Form.Group>
     </Form>
   );
 }
 
-export default CustomForm;
+export default SigninForm;

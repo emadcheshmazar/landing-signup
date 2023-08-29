@@ -13,3 +13,13 @@
     justify-content: space-between;
   }
 }
+
+.custom-card3 {
+  margin: 0 10px;
+  height: 10rem;
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
