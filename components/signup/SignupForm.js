@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { FloatingLabel, Col, Form } from "react-bootstrap";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-function CustomForm() {
+function SignupForm() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +14,7 @@ function CustomForm() {
   );
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
 
@@ -23,9 +25,21 @@ function CustomForm() {
     const form = e.currentTarget;
 
     if (form.checkValidity()) {
-      const user = { email, name };
-      console.log(user, "user");
-      localStorage.setItem("user", JSON.stringify(user));
+      const users = localStorage.getItem("users");
+      const parsedUsers = JSON.parse(users) || [];
+      const existingUser = parsedUsers.find((user) => user.email === email);
+
+      if (existingUser) {
+        setErrorMessage("This email is already registered");
+        setValidated(false);
+        return;
+      }
+
+      const user = { email, name, password };
+      parsedUsers.push(user);
+
+      localStorage.setItem("users", JSON.stringify(parsedUsers));
+      localStorage.setItem("current-user", JSON.stringify(user));
       router.push("/");
     }
 
@@ -99,7 +113,7 @@ function CustomForm() {
         <FloatingLabel
           controlId="floatingPassword"
           label={passwordPlaceholder}
-          onFocus={() => handleFocus(setPasswordPlaceholder, "Your Password:")}
+          onFocus={() => handleFocus(setPasswordPlaceholder, "your password:")}
           onBlur={() =>
             handleBlur(
               setPasswordPlaceholder,
@@ -143,6 +157,7 @@ function CustomForm() {
           onChange={(e) => handleInputChange(e, setCheckboxChecked)}
         />
       </Form.Group>
+      {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
       <Form.Group
         as={Col}
         className="d-flex justify-content-center align-items-center row"
@@ -152,11 +167,13 @@ function CustomForm() {
         </button>
         <span className="fw-medium col-12 text-center">
           Already have an account?
-          <span className="color-primary pointer">Sign in</span>
+          <Link href="/signin">
+            <span className="color-primary pointer">Sign in</span>
+          </Link>
         </span>
       </Form.Group>
     </Form>
   );
 }
 
-export default CustomForm;
+export default SignupForm;

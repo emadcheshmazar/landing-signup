@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SignupForm from "../components/signup/SignupForm";
+import SigninForm from "../components/signup/SigninForm";
 import RegesterImage from "../components/signup/RegesterImage";
 import Link from "next/link";
 
-const Signup = () => {
+const Signin = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Signup = () => {
           </Link>
           <h2 className="fw-bold my-5">Create your Fiber account</h2>
           <div className="col-12">
-            <SignupForm />
+            <SigninForm />
           </div>
         </div>
       </div>
@@ -34,4 +34,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signin;

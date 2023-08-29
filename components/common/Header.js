@@ -5,6 +5,7 @@ import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 
 const Header = () => {
   const [navShadow, setNavShadow] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,11 +15,22 @@ const Header = () => {
         setNavShadow(false);
       }
     };
+
+    const storedUser = JSON.parse(localStorage.getItem("current-user"));
+    if (storedUser && storedUser.name && storedUser.email) {
+      setUser(storedUser);
+    }
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("current-user");
+    setUser(null);
+  };
 
   return (
     <Navbar
@@ -41,12 +53,24 @@ const Header = () => {
             <Nav.Link href="#link">Pricing</Nav.Link>
             <Nav.Link href="#link">Features</Nav.Link>
           </Nav>
-          <div className="sign-up">
-            <strong className="">Sign In</strong>
-            <Link href="/signup">
-              <button className="custom-btn mx-3">Sign Up</button>
-            </Link>
-          </div>
+          {user ? (
+            <NavDropdown
+              className="my-1"
+              title={user.name}
+              id="basic-nav-dropdown"
+            >
+              <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+            </NavDropdown>
+          ) : (
+            <div>
+              <Link href="/signin">
+                <button className="custom-btn3">Sign in</button>
+              </Link>
+              <Link href="/signup">
+                <button className="custom-btn mx-3">Sign Up</button>
+              </Link>
+            </div>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
