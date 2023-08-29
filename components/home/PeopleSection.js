@@ -14,7 +14,7 @@ const PeopleSection = () => {
 
   const userComments = user?.comments.map((item, idx) => (
     <div className="col-12 col-lg-10 col-xl-4" key={idx}>
-      <CustomCard name={user.name} title={item.title} comment={item.comment} />
+      <CustomCard deleteIcon={false} name={user.name} title={item.title} comment={item.comment} />
     </div>
   ));
   return (
@@ -23,7 +23,9 @@ const PeopleSection = () => {
         <Container>
           <h2>{`${user?.name.toUpperCase()}'s comments:`}</h2>
           <div className="d-flex flex-wrap justify-content-center">
-            {userComments}
+            {userComments && userComments.length > 0
+              ? userComments
+              : "No Comments..."}
           </div>
         </Container>
       ) : (

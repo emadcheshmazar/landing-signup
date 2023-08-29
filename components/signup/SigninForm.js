@@ -5,14 +5,11 @@ import Link from "next/link";
 
 function SigninForm() {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [emailPlaceholder, setEmailPlaceholder] = useState("John@example.com");
-  const [namePlaceholder, setNamePlaceholder] = useState("Jhon Doe");
   const [passwordPlaceholder, setPasswordPlaceholder] = useState(
     "At least 8 characters"
   );
-  const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [validated, setValidated] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -34,7 +31,7 @@ function SigninForm() {
       if (existingUser) {
         setErrorMessage("");
         localStorage.setItem("current-user", JSON.stringify(existingUser));
-        router.push("/");
+        router.push(`/user/${router.query.user}`);
       } else {
         setErrorMessage("Invalid email or password");
       }
@@ -46,7 +43,7 @@ function SigninForm() {
   };
 
   const handleInputChange = (e, setter) => {
-    setter(e.target.value);
+    setter(e.target.value.toLowerCase());
   };
 
   const handleFocus = (setter, placeholder) => {

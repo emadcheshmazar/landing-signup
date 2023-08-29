@@ -39,14 +39,14 @@ function SignupForm() {
 
       localStorage.setItem("users", JSON.stringify(parsedUsers));
       localStorage.setItem("current-user", JSON.stringify(user));
-      router.push("/");
+      router.push(`/user/${router.query.user}`);
     }
 
     setValidated(true);
   };
 
   const handleInputChange = (e, setter) => {
-    setter(e.target.value);
+    setter(e.target.value.toLowerCase());
   };
 
   const handleFocus = (setter, placeholder) => {

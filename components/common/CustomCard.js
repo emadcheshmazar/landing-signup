@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, Image } from "react-bootstrap";
 
-const CustomCard = ({ name, title, comment, email, password }) => {
+const CustomCard = ({ name, title, comment, email, password, deleteIcon }) => {
   const currentUser = JSON.parse(localStorage.getItem("current-user"));
   console.log(currentUser);
 
@@ -33,17 +33,19 @@ const CustomCard = ({ name, title, comment, email, password }) => {
                 <strong className="color-primary">{name}</strong>
                 <span>{title}</span>
               </div>
-              <Button
-                className="col-2"
-                variant="link"
-                onClick={() => deleteComment(title, comment)}
-              >
-                <Image
-                  className="col-12 mb-2"
-                  src="/assets/trash.png"
-                  alt="hero-Illustration"
-                />
-              </Button>
+              {deleteIcon && (
+                <Button
+                  className="col-3 col-sm-2 col-md-1 col-lg-2 "
+                  variant="link"
+                  onClick={() => deleteComment(title, comment)}
+                >
+                  <Image
+                    className="col-12 mb-2"
+                    src="/assets/trash.png"
+                    alt="hero-Illustration"
+                  />
+                </Button>
+              )}
             </Card.Title>
             <Card.Text className="col-9">{comment}</Card.Text>
           </div>

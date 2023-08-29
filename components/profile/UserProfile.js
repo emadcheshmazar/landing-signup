@@ -128,13 +128,14 @@ const UserProfile = ({ user }) => {
             className="col-12 d-flex flex-wrap overflow-auto"
           >
             {currentUser.comments.map((item, idx) => (
-              <div className="col-6" key={idx}>
+              <div className="col-12 col-xl-6" key={idx}>
                 <CustomCard
                   name={currentUser.name}
                   email={currentUser.email}
                   password={currentUser.password}
                   title={item.title}
                   comment={item.comment}
+                  deleteIcon={true}
                 />
               </div>
             ))}

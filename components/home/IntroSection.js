@@ -65,55 +65,10 @@ const IntroSection = () => {
             </span>
           </div>
         </div>
-        <div className="col-12 col-lg-5 position-relative">
+        <div className="col-12 col-lg-5 my-5 my-lg-0 position-relative">
           <Image
             className="col-12"
-            src="/assets/hero.png"
-            alt="hero-Illustration"
-          />
-          <Image
-            className="col-3 custom-shadow image-container1 obj1"
-            src="/assets/obj1.png"
-            alt="hero-Illustration"
-          />
-          <Image
-            className="col-3 custom-shadow image-container2 obj2"
-            src="/assets/obj2.png"
-            alt="hero-Illustration"
-          />
-          <Image
-            className="col-3 custom-shadow image-container3 obj3"
-            src="/assets/obj3.png"
-            alt="hero-Illustration"
-          />
-          <Image
-            className="col-3 custom-shadow image-container4 obj4"
-            src="/assets/obj4.png"
-            alt="hero-Illustration"
-          />
-          <Image
-            className="col-3 custom-shadow image-container5 obj5"
-            src="/assets/obj5.png"
-            alt="hero-Illustration"
-          />
-          <Image
-            className="col-3 custom-shadow image-container6 obj6"
-            src="/assets/obj6.png"
-            alt="hero-Illustration"
-          />
-          <Image
-            className="col-2 custom-shadow image-container7 plus1"
-            src="/assets/plus.png"
-            alt="hero-Illustration"
-          />
-          <Image
-            className="col-2 custom-shadow image-container8 plus2"
-            src="/assets/plus.png"
-            alt="hero-Illustration"
-          />
-          <Image
-            className="col-2 custom-shadow image-container9 plus3"
-            src="/assets/plus.png"
+            src="/assets/hero-Illustration.png"
             alt="hero-Illustration"
           />
         </div>

@@ -144,5 +144,8 @@ $primary-active: darken($primary, 15%);
   .dropdown-menu {
     width: 100%;
     margin-top: 10px;
+    @media (max-width: 992px) {
+      width: 50%;
+    }
   }
 }
