@@ -1,0 +1,15 @@
+.people-head {
+  display: flex;
+  flex-direction: column;
+  margin: 9px 0 0 14px;
+}
+
+.custom-card2 {
+  margin: 0 30px;
+  height: 20rem;
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
