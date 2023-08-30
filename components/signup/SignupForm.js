@@ -39,7 +39,7 @@ function SignupForm() {
 
       localStorage.setItem("users", JSON.stringify(parsedUsers));
       localStorage.setItem("current-user", JSON.stringify(user));
-      router.push(`/user/${router.query.user}`);
+      router.push(`/user/${user.name}`);
     }
 
     setValidated(true);
