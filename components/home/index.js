@@ -1,6 +1,6 @@
 import React from "react";
 import IntroSection from "./IntroSection";
-import WhyFiberSection from "./whyFiberSection";
+import WhyFiberSection from "./WhyFiberSection";
 import CTASection from "./CTASection";
 import PeopleSection from "./PeopleSection";
 
