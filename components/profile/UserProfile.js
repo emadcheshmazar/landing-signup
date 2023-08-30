@@ -51,6 +51,7 @@ const UserProfile = ({ user }) => {
       localStorage.setItem("users", JSON.stringify(users));
       localStorage.setItem("current-user", JSON.stringify(newObj));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commentsArray]);
   return (
     <div style={{ height: "100vh" }} className="d-flex flex-wrap">
